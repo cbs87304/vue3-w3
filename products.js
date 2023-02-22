@@ -48,7 +48,7 @@ createApp({
               })
               .catch((err) => {
                 alert(err.response.data.message)
-                window.location = "login.html"; //未登入或登入錯誤,顯示錯誤資訊,並跳回登入畫面
+                window.location = "index.html"; //未登入或登入錯誤,顯示錯誤資訊,並跳回登入畫面
               })
           },
 
