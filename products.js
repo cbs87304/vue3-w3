@@ -1,13 +1,13 @@
 import { createApp } from "https://unpkg.com/vue@3/dist/vue.esm-browser.js";
 
-let productModal = {};
-let delProductMotdal = {};
+let productModal = null;
+let delProductMotdal = null;
 
 createApp({
     data() {
       return {
         apiUrl: "https://vue3-course-api.hexschool.io/v2",
-        apiPath: "cbs3345678",//每個人設定不一樣
+        apiPath: "cbs33",//每個人設定不一樣
         products: [],
         isNew: false,
         tempProduct: {
