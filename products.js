@@ -33,25 +33,25 @@ createApp({
   },
 
   methods: {
-    checkAdmin() {//帳號驗證
+    checkAdmin() {//先檢查是否已登入
       const url = `${this.apiUrl}/api/user/check`;
       
       axios.post(url)
         .then(() => {
-          this.getData();
+          this.getData();//已登入就執行下方getData的函式
         })
         .catch((err) => {
           alert(err.response.data.message)
-          window.location = 'index.html';
+          window.location = 'index.html';//未登入或登入錯誤,顯示錯誤資訊,並跳回登入畫面
         })
     },
-    
-    getData() { //取得所有的產品資料
+    //渲染產品資料庫至畫面
+    getData() { 
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
       
       axios
       .get(url).then((response) => {
-        this.products = response.data.products;
+        this.products = response.data.products;//取得產品資料
       })
       .catch((err) => {
         alert(err.response.data.message);
@@ -113,5 +113,5 @@ createApp({
       this.tempProduct.imagesUrl.push('');
     },
   },
-  
+
 }).mount('#app');
