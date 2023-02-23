@@ -7,7 +7,7 @@ createApp({
   data() {
     return {
       apiUrl: 'https://vue3-course-api.hexschool.io/v2',
-      apiPath: 'cbs33',
+      apiPath: 'cbs33',    //每人不一樣
       products: [],
       isNew: false,
       tempProduct: {
@@ -31,7 +31,7 @@ createApp({
     this.checkAdmin();
   },
   methods: {
-    checkAdmin() {
+    checkAdmin() {//帳號驗證
       const url = `${this.apiUrl}/api/user/check`;
       axios.post(url)
         .then(() => {
@@ -42,7 +42,7 @@ createApp({
           window.location = 'index.html';
         })
     },
-    getData() {
+    getData() { //取得所有的產品資料
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
       axios.get(url).then((response) => {
         this.products = response.data.products;
@@ -50,11 +50,11 @@ createApp({
         alert(err.response.data.message);
       })
     },
-    updateProduct() {
+    updateProduct() { 
       let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
       let http = 'post';
 
-      if (!this.isNew) {
+      if (!this.isNew) {  
         url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
         http = 'put'
       }
@@ -67,23 +67,23 @@ createApp({
         alert(err.response.data.message);
       })
     },
-    openModal(isNew, item) {
-      if (isNew === 'new') {
+    openModal(isNew, item) {    //產品列表的顯示
+      if (isNew === 'new') {    
         this.tempProduct = {
           imagesUrl: [],
         };
         this.isNew = true;
         productModal.show();
-      } else if (isNew === 'edit') {
+      } else if (isNew === 'edit') {   
         this.tempProduct = { ...item };
         this.isNew = false;
         productModal.show();
-      } else if (isNew === 'delete') {
+      } else if (isNew === 'delete') { 
         this.tempProduct = { ...item };
         delProductModal.show()
       }
     },
-    delProduct() {
+    delProduct() {    //刪除產品
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
 
       axios.delete(url).then((response) => {
