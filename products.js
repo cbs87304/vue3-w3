@@ -26,13 +26,16 @@ createApp({
 
     // 取出 Token
     const token = document.cookie.replace(/(?:(?:^|.*;\s*)hexToken\s*=\s*([^;]*).*$)|^.*$/, '$1');
+    
     axios.defaults.headers.common.Authorization = token;
 
     this.checkAdmin();
   },
+
   methods: {
     checkAdmin() {//帳號驗證
       const url = `${this.apiUrl}/api/user/check`;
+      
       axios.post(url)
         .then(() => {
           this.getData();
@@ -42,14 +45,19 @@ createApp({
           window.location = 'index.html';
         })
     },
+    
     getData() { //取得所有的產品資料
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/products/all`;
-      axios.get(url).then((response) => {
+      
+      axios
+      .get(url).then((response) => {
         this.products = response.data.products;
-      }).catch((err) => {
+      })
+      .catch((err) => {
         alert(err.response.data.message);
       })
     },
+    
     updateProduct() { 
       let url = `${this.apiUrl}/api/${this.apiPath}/admin/product`;
       let http = 'post';
@@ -63,10 +71,12 @@ createApp({
         alert(response.data.message);
         productModal.hide();
         this.getData();
-      }).catch((err) => {
+      })
+      .catch((err) => {
         alert(err.response.data.message);
       })
     },
+
     openModal(isNew, item) {    //產品列表的顯示
       if (isNew === 'new') {    
         this.tempProduct = {
@@ -83,20 +93,25 @@ createApp({
         delProductModal.show()
       }
     },
+
     delProduct() {    //刪除產品
       const url = `${this.apiUrl}/api/${this.apiPath}/admin/product/${this.tempProduct.id}`;
 
-      axios.delete(url).then((response) => {
+      axios
+      .delete(url).then((response) => {
         alert(response.data.message);
         delProductModal.hide();
         this.getData();
-      }).catch((err) => {
+      })
+      .catch((err) => {
         alert(err.response.data.message);
       })
     },
+
     createImages() {
       this.tempProduct.imagesUrl = [];
       this.tempProduct.imagesUrl.push('');
     },
   },
+  
 }).mount('#app');
