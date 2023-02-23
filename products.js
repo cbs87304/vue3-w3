@@ -7,7 +7,7 @@ createApp({
   data() {
     return {
       apiUrl: 'https://vue3-course-api.hexschool.io/v2',
-      apiPath: 'cbs3345678',
+      apiPath: 'cbs33',
       products: [],
       isNew: false,
       tempProduct: {
